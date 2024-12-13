@@ -1,0 +1,35 @@
+# Ignorar carpetas de dependencias en backend y frontend
+backend/node_modules/
+frontend/node_modules/
+
+# Ignorar los directorios de compilación en backend y frontend
+backend/dist/
+frontend/build/
+frontend/dist/
+
+# Ignorar logs
+*.log
+backend/logs/
+frontend/logs/
+
+# Ignorar datos temporales
+.DS_Store
+Thumbs.db
+
+# Ignorar archivos de configuración del editor
+.vscode/
+.idea/
+*.swp
+
+# Ignorar caché de npm y Yarn
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Ignorar configuraciones específicas de sistemas operativos
+.env.*
+.env.local
+*.pid
+*.seed
+*.local
