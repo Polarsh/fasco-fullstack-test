@@ -3,13 +3,14 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
 import { MongooseModule } from '@nestjs/mongoose';
-import { ProductosModule } from './productos/productos.module';
-import { TiendasModule } from './tiendas/tiendas.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+
+import { ProductosModule } from './productos/productos.module';
+import { StoreModule } from './store/store.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true }), // Carga las variables .env
+    ConfigModule.forRoot({ isGlobal: true }),
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => ({
@@ -18,7 +19,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
       inject: [ConfigService],
     }),
     ProductosModule,
-    TiendasModule,
+    StoreModule,
   ],
   controllers: [AppController],
   providers: [AppService],
