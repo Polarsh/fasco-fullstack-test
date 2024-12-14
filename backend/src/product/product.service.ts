@@ -1,32 +1,33 @@
+import { isValidObjectId, Model } from 'mongoose';
+
+import { InjectModel } from '@nestjs/mongoose';
+import { Product } from './product.schema';
 import {
   BadRequestException,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Producto } from './producto.schema';
-import { isValidObjectId, Model } from 'mongoose';
 
 @Injectable()
-export class ProductosService {
+export class ProductService {
   constructor(
-    @InjectModel(Producto.name) private productoModel: Model<Producto>,
+    @InjectModel(Product.name) private productModel: Model<Product>,
   ) {}
 
-  async findAll(): Promise<Producto[]> {
-    const products = await this.productoModel.find().exec();
+  async findAll(): Promise<Product[]> {
+    const products = await this.productModel.find().exec();
     if (products.length === 0) {
       throw new NotFoundException('No hay productos disponibles para mostrar');
     }
     return products;
   }
 
-  async findOne(id: string): Promise<Producto> {
+  async findOne(id: string): Promise<Product> {
     if (!isValidObjectId(id)) {
       throw new BadRequestException(`El ID proporcionado (${id}) no es válido`);
     }
 
-    const product = await this.productoModel.findById(id).exec();
+    const product = await this.productModel.findById(id).exec();
     if (!product) {
       throw new NotFoundException(`Producto con ID ${id} no encontrado`);
     }
@@ -37,7 +38,7 @@ export class ProductosService {
     name: string;
     price: number;
     type: string;
-  }): Promise<Producto> {
+  }): Promise<Product> {
     const { type, name, price } = data;
 
     // Validar el tipo
@@ -61,14 +62,14 @@ export class ProductosService {
     }
 
     // Crear producto
-    const newProduct = await this.productoModel.create(data);
+    const newProduct = await this.productModel.create(data);
     return newProduct.save();
   }
 
   async update(
     id: string,
     data: { name?: string; price?: number; type?: string },
-  ): Promise<Producto> {
+  ): Promise<Product> {
     const { type, name, price } = data;
 
     if (!isValidObjectId(id)) {
@@ -100,7 +101,7 @@ export class ProductosService {
     }
 
     // Actualizar el producto
-    const product = await this.productoModel
+    const product = await this.productModel
       .findByIdAndUpdate(id, data, { new: true })
       .exec();
 
@@ -119,7 +120,7 @@ export class ProductosService {
     }
 
     // Eliminar el producto
-    const result = await this.productoModel.findByIdAndDelete(id).exec();
+    const result = await this.productModel.findByIdAndDelete(id).exec();
 
     // Verificar si el producto existía
     if (!result) {

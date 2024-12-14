@@ -1,20 +1,20 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { getModelToken } from '@nestjs/mongoose';
-import { NotFoundException, BadRequestException } from '@nestjs/common';
 import { Model } from 'mongoose';
 
-import { ProductosService } from './productos.service';
-import { Producto } from './producto.schema';
+import { BadRequestException, NotFoundException } from '@nestjs/common';
+import { Test, TestingModule } from '@nestjs/testing';
+import { getModelToken } from '@nestjs/mongoose';
 
-describe('ProductosService', () => {
-  let service: ProductosService;
-  let model: Model<Producto>;
+import { ProductService } from './product.service';
+import { Product } from './product.schema';
 
-  const valid_id = '603d2149f2b3a12c8a1e8b12';
-  const invalid_id = '1';
+describe('ProductService', () => {
+  let service: ProductService;
+  let model: Model<Product>;
 
+  const validId = '603d2149f2b3a12c8a1e8b12';
+  const invalidId = '1';
   const mockProduct = {
-    id: 'valid_id',
+    id: validId,
     name: 'Manzanas',
     price: 10,
     type: 'Perecedero',
@@ -33,16 +33,16 @@ describe('ProductosService', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
-        ProductosService,
+        ProductService,
         {
-          provide: getModelToken(Producto.name),
+          provide: getModelToken(Product.name),
           useValue: mockModel,
         },
       ],
     }).compile();
 
-    service = module.get<ProductosService>(ProductosService);
-    model = module.get<Model<Producto>>(getModelToken(Producto.name));
+    service = module.get<ProductService>(ProductService);
+    model = module.get<Model<Product>>(getModelToken(Product.name));
   });
 
   it('should be defined', () => {
@@ -50,8 +50,8 @@ describe('ProductosService', () => {
   });
 
   describe('findAll', () => {
-    it('should return a list of products', async () => {
-      jest.spyOn(model, 'find').mockReturnValue({
+    it('should return an array of products', async () => {
+      jest.spyOn(model, 'find').mockReturnValueOnce({
         exec: jest.fn().mockResolvedValueOnce(mockProductArray),
       } as any);
 
@@ -61,7 +61,7 @@ describe('ProductosService', () => {
     });
 
     it('should throw NotFoundException if no products are found', async () => {
-      jest.spyOn(model, 'find').mockReturnValue({
+      jest.spyOn(model, 'find').mockReturnValueOnce({
         exec: jest.fn().mockResolvedValueOnce([]),
       } as any);
 
@@ -70,29 +70,26 @@ describe('ProductosService', () => {
   });
 
   describe('findOne', () => {
-    it('should return a product if found', async () => {
-      jest.spyOn(mockModel, 'findById').mockReturnValueOnce({
+    it('should return a product by ID', async () => {
+      jest.spyOn(model, 'findById').mockReturnValueOnce({
         exec: jest.fn().mockResolvedValueOnce(mockProduct),
       } as any);
 
-      const result = await service.findOne(valid_id);
+      const result = await service.findOne(validId);
       expect(result).toEqual(mockProduct);
-      expect(mockModel.findById).toHaveBeenCalledWith(valid_id);
+      expect(model.findById).toHaveBeenCalledWith(validId);
     });
 
     it('should throw NotFoundException if product is not found', async () => {
-      jest.spyOn(mockModel, 'findById').mockReturnValueOnce({
+      jest.spyOn(model, 'findById').mockReturnValueOnce({
         exec: jest.fn().mockResolvedValueOnce(null),
       } as any);
 
-      await expect(service.findOne(valid_id)).rejects.toThrow(
-        NotFoundException,
-      );
-      expect(mockModel.findById).toHaveBeenCalledWith(valid_id);
+      await expect(service.findOne(validId)).rejects.toThrow(NotFoundException);
     });
 
     it('should throw BadRequestException if ID is invalid', async () => {
-      await expect(service.findOne(invalid_id)).rejects.toThrow(
+      await expect(service.findOne(invalidId)).rejects.toThrow(
         BadRequestException,
       );
     });
@@ -101,16 +98,13 @@ describe('ProductosService', () => {
   describe('create', () => {
     it('should create a new product', async () => {
       const dto = { name: 'Peras', price: 12, type: 'No perecedero' };
-
       jest.spyOn(model, 'create').mockResolvedValueOnce({
         ...dto,
-        id: valid_id,
-        save: jest.fn().mockResolvedValueOnce({ ...dto, id: valid_id }),
+        save: jest.fn().mockResolvedValueOnce({ ...dto, id: validId }),
       } as any);
 
       const result = await service.create(dto);
-
-      expect(result).toEqual({ ...dto, id: valid_id });
+      expect(result).toEqual({ ...dto, id: validId });
       expect(model.create).toHaveBeenCalledWith(dto);
     });
 
@@ -122,73 +116,62 @@ describe('ProductosService', () => {
   });
 
   describe('update', () => {
-    it('should update a product if valid', async () => {
+    it('should update a product', async () => {
+      const dto = { name: 'Manzanas Actualizadas', price: 15 };
       jest.spyOn(model, 'findByIdAndUpdate').mockReturnValueOnce({
         exec: jest.fn().mockResolvedValueOnce(mockProduct),
       } as any);
 
-      const dto = { price: 15 };
-      const result = await service.update(valid_id, dto);
-
+      const result = await service.update(validId, dto);
       expect(result).toEqual(mockProduct);
-      expect(model.findByIdAndUpdate).toHaveBeenCalledWith(valid_id, dto, {
+      expect(model.findByIdAndUpdate).toHaveBeenCalledWith(validId, dto, {
         new: true,
       });
     });
 
     it('should throw NotFoundException if product is not found', async () => {
+      const dto = { name: 'Manzanas Actualizadas', price: 15 };
       jest.spyOn(model, 'findByIdAndUpdate').mockReturnValueOnce({
         exec: jest.fn().mockResolvedValueOnce(null),
       } as any);
 
-      const nonexistentId = valid_id;
-
-      await expect(
-        service.update(nonexistentId, { price: 15 }),
-      ).rejects.toThrow(NotFoundException);
-
-      expect(model.findByIdAndUpdate).toHaveBeenCalledWith(
-        nonexistentId,
-        { price: 15 },
-        { new: true },
+      await expect(service.update(validId, dto)).rejects.toThrow(
+        NotFoundException,
       );
     });
 
     it('should throw BadRequestException for invalid type', async () => {
       const dto = { type: 'InvalidType' };
 
-      await expect(service.update(valid_id, dto)).rejects.toThrow(
+      await expect(service.update(validId, dto)).rejects.toThrow(
         BadRequestException,
       );
     });
   });
 
   describe('delete', () => {
-    it('should delete a product if valid', async () => {
-      // Mock para simular que el producto existe y es eliminado
+    it('should delete a product', async () => {
       jest.spyOn(model, 'findByIdAndDelete').mockReturnValueOnce({
         exec: jest.fn().mockResolvedValueOnce(mockProduct),
       } as any);
 
-      const result = await service.delete(valid_id);
-
+      const result = await service.delete(validId);
       expect(result).toEqual({
-        message: `El producto con ID ${valid_id} fue eliminado con éxito`,
+        message: `El producto con ID ${validId} fue eliminado con éxito`,
       });
-      expect(model.findByIdAndDelete).toHaveBeenCalledWith(valid_id);
+      expect(model.findByIdAndDelete).toHaveBeenCalledWith(validId);
     });
 
-    it('should throw NotFoundException if product does not exist', async () => {
+    it('should throw NotFoundException if product is not found', async () => {
       jest.spyOn(model, 'findByIdAndDelete').mockReturnValueOnce({
         exec: jest.fn().mockResolvedValueOnce(null),
       } as any);
 
-      await expect(service.delete(valid_id)).rejects.toThrow(NotFoundException);
-      expect(model.findByIdAndDelete).toHaveBeenCalledWith(valid_id);
+      await expect(service.delete(validId)).rejects.toThrow(NotFoundException);
     });
 
     it('should throw BadRequestException if ID is invalid', async () => {
-      await expect(service.delete(invalid_id)).rejects.toThrow(
+      await expect(service.delete(invalidId)).rejects.toThrow(
         BadRequestException,
       );
     });

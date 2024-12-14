@@ -1,8 +1,9 @@
-import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
+import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
+
 @Schema()
-export class Producto extends Document {
+export class Product extends Document {
   @Prop({ required: true })
   name: string;
 
@@ -13,4 +14,4 @@ export class Producto extends Document {
   type: 'Perecedero' | 'No perecedero';
 }
 
-export const ProductoSchema = SchemaFactory.createForClass(Producto);
+export const ProductSchema = SchemaFactory.createForClass(Product);
