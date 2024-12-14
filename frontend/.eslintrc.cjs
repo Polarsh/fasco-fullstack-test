@@ -25,5 +25,9 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: ['react', 'prettier'],
-  rules: {},
+  rules: {
+    'no-unused-vars': 'warn',
+    'react/prop-types': 'off',
+    'space-before-function-paren': 0,
+  },
 }

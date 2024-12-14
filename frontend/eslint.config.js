@@ -33,6 +33,7 @@ export default [
         'warn',
         { allowConstantExport: true },
       ],
+      'react/prop-types': 'off', // Desactiva la validación de prop-types, incluyendo 'children'
     },
   },
 ]
