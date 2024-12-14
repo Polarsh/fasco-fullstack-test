@@ -11,7 +11,7 @@ import {
 import { StoreService } from './store.service';
 import { Store } from './store.schema';
 
-@Controller('tiendas')
+@Controller('stores')
 export class StoreController {
   constructor(private readonly storeService: StoreService) {}
 
