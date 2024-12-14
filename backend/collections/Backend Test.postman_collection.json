@@ -1,0 +1,648 @@
+{
+	"info": {
+		"_postman_id": "1b94c2c6-8e57-4eb0-ae21-8f5490959315",
+		"name": "Backend Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28585090"
+	},
+	"item": [
+		{
+			"name": "Productos",
+			"item": [
+				{
+					"name": "Crear un producto válido.",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Manzana\",\r\n    \"price\": 10.5,\r\n    \"type\": \"Perecedero\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/products",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear un producto (ERROR)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Polo Clásico\",\r\n    \"price\": 10.5,\r\n    \"type\": \"Ropa\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/products",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener todos los productos.",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/products",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener un producto por ID.",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/products/675cea5955db781629354824/stores",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"products",
+								"675cea5955db781629354824",
+								"stores"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener un producto por ID. (ERROR)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/products/675c6df9915afc1299e99999",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"products",
+								"675c6df9915afc1299e99999"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar un producto.",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Pera\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/products/675cea5955db781629354824",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"products",
+								"675cea5955db781629354824"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar un producto. [ERROR]",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"type\": \"Perecedero\",\r\n    \"name\":\"Polo Clásico\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/products/222c6df9915afc1299e540d9",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"products",
+								"222c6df9915afc1299e540d9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar un producto por su ID.",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/products/675cea8155db78162935482c",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"products",
+								"675cea8155db78162935482c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar un producto. (ERROR)",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/products/675c6df9915afc1299e54888",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"products",
+								"675c6df9915afc1299e54888"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tiendas",
+			"item": [
+				{
+					"name": "Crear una tienda válida.",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Tienda El Guepardo\",\r\n    \"city\": \"CCC\",\r\n    \"address\": \"Av. El Guepardo\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/stores",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"stores"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear una tienda (ERROR)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Tienda El Polo\",\r\n    \"city\": \"AA2\",\r\n    \"address\": \"Av. El Polo\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/stores",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"stores"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener todas las tiendas.",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/stores",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"stores"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener una tienda por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/stores/675caee93a67bd00655657fe",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"stores",
+								"675caee93a67bd00655657fe"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener una tienda por ID. (ERROR)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/stores/675c6df9915afc1299e99999",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"stores",
+								"675c6df9915afc1299e99999"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar una tienda.",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Tienda El Polo\",\r\n    \"city\": \"AAB\",\r\n    \"address\": \"Av. El Polo 100\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/stores/675caf173a67bd0065565804",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"stores",
+								"675caf173a67bd0065565804"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar una tienda. [ERROR]",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"city\": \"AABB\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/stores/675caf173a67bd0065565804",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"stores",
+								"675caf173a67bd0065565804"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar una tienda por su ID.",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/stores/675caf163a67bd0065565801",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"stores",
+								"675caf163a67bd0065565801"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar una tienda. (ERROR)",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/stores/675c6df9915afc1299e54888",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"stores",
+								"675c6df9915afc1299e54888"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Asociación",
+			"item": [
+				{
+					"name": "Agregar una nueva tienda a las oferentes de un producto.",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/products/675cea5955db781629354824/stores/675cfabf84de970297e50c50",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"products",
+								"675cea5955db781629354824",
+								"stores",
+								"675cfabf84de970297e50c50"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Agregar una nueva tienda a las oferentes de un producto. (ERROR)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/products/675cea5955db781629354824/stores/675cf80a5d1ac61692961777",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"products",
+								"675cea5955db781629354824",
+								"stores",
+								"675cf80a5d1ac61692961777"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener todas las tiendas que ofrecen un producto.",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/products/675cea5955db781629354824/stores",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"products",
+								"675cea5955db781629354824",
+								"stores"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener una tienda que ofrece un producto.",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/products/675cea5955db781629354824/stores/675cf80a5d1ac6169296177f",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"products",
+								"675cea5955db781629354824",
+								"stores",
+								"675cf80a5d1ac6169296177f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener una tienda que ofrece un producto.",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    \"675cf80a5d1ac6169296177f\",\r\n    \"675cfabf84de970297e50c50\"\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/products/675cea5955db781629354824/stores",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"products",
+								"675cea5955db781629354824",
+								"stores"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener una tienda que ofrece un producto. ERROR Copy",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    \"605d2149f2b3a12c8a1e8b15\",\r\n    \"605d2149f2b3a12c8a1e8b16\"\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/products/675cea5955db781629354824/stores",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"products",
+								"675cea5955db781629354824",
+								"stores"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar una tienda que no ofrece un producto.",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/products/675cea5955db781629354824/stores/675cfabf84de970297e50c50",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"products",
+								"675cea5955db781629354824",
+								"stores",
+								"675cfabf84de970297e50c50"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar una tienda que no ofrece un producto. ERROR",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/products/675cea5955db781629354824/stores/675cfabf84de970297e55555",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"products",
+								"675cea5955db781629354824",
+								"stores",
+								"675cfabf84de970297e55555"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "http://localhost:3000",
+			"type": "string"
+		}
+	]
+}
