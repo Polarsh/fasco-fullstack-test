@@ -7,6 +7,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 
 import { ProductModule } from './product/product.module';
 import { StoreModule } from './store/store.module';
+import { ProductStoreModule } from './product-store/product-store.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { StoreModule } from './store/store.module';
       inject: [ConfigService],
     }),
     ProductModule,
+    ProductStoreModule,
     StoreModule,
   ],
   controllers: [AppController],

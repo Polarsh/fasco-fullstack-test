@@ -1,4 +1,4 @@
-import { Document } from 'mongoose';
+import { Document, Types } from 'mongoose';
 
 import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
 
@@ -12,6 +12,9 @@ export class Product extends Document {
 
   @Prop({ required: true, enum: ['Perecedero', 'No perecedero'] })
   type: 'Perecedero' | 'No perecedero';
+
+  @Prop({ type: [{ type: Types.ObjectId, ref: 'Store' }] })
+  stores: Types.ObjectId[];
 }
 
 export const ProductSchema = SchemaFactory.createForClass(Product);
