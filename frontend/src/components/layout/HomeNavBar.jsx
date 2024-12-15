@@ -18,7 +18,7 @@ export default function HomeNavbar() {
     { name: 'Deals', action: () => scrollToSection('deals') },
     { name: 'New Arrivals', action: () => scrollToSection('new-arrivals') },
     { name: 'Testimonials', action: () => scrollToSection('testimonials') },
-    { name: 'Sign in', href: '/signin' },
+    { name: 'Sign in', href: '/sign-in' },
   ]
 
   return (
@@ -69,7 +69,7 @@ export default function HomeNavbar() {
             )}
             <div>
               <Link
-                to='/signup'
+                to='/sign-up'
                 className='bg-black text-white py-2 px-4 rounded-lg shadow-md hover:bg-gray-800 transition-all'>
                 Sign Up
               </Link>
@@ -102,7 +102,7 @@ export default function HomeNavbar() {
           )
         )}
         <Link
-          to='/signup'
+          to='/sign-up'
           className='block bg-black text-white py-2 px-4 rounded-lg shadow-md hover:bg-gray-800 transition-all text-center mt-4'
           onClick={() => setDrawerOpen(false)}>
           Sign Up

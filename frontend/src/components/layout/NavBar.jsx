@@ -1,79 +1,107 @@
+import { Link, useLocation } from 'react-router-dom'
+import { FaUser, FaSearch, FaStar, FaShoppingBag } from 'react-icons/fa'
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
-import Logo from '../Logo'
 import Drawer from '../Drawer'
+import Logo from '../Logo'
 
-export default function Navbar() {
+export default function NewNavbar() {
   const [isDrawerOpen, setDrawerOpen] = useState(false)
+  const [isDropdownOpen, setDropdownOpen] = useState(false)
+  const location = useLocation() // Obtenemos la ruta actual
 
   const navLinks = [
     { name: 'Home', href: '/' },
-    { name: 'Deals', href: '/deals' },
-    { name: 'New Arrivals', href: '/new-arrivals' },
-    { name: 'Packages', href: '/packages' },
-    { name: 'Sign in', href: '/signin' },
+    { name: 'Shop', href: '/shop' },
+    { name: 'Products', href: '/products' },
+    { name: 'Pages', action: () => setDropdownOpen(!isDropdownOpen) },
   ]
 
+  const isActive = path => location.pathname === path
+
   return (
-    <header>
-      <nav className='bg-white shadow-md px-6 py-4 flex items-center justify-between'>
+    <header className='bg-white shadow-md'>
+      <nav className='max-w-screen-xl mx-auto px-6 py-4 flex items-center justify-between'>
         {/* Logo */}
         <Logo className='h-6 w-auto sm:h-8' />
 
-        {/* Botón para abrir el Drawer */}
+        {/* Links Centrales */}
+        <ul className='hidden md:flex space-x-8 items-center'>
+          {navLinks.map((link, index) => (
+            <li key={index} className='relative'>
+              {link.href ? (
+                <Link
+                  to={link.href}
+                  className={`relative text-gray-700 hover:text-black transition-all ${
+                    isActive(link.href) ? 'text-black font-bold' : ''
+                  }`}>
+                  {link.name}
+                  {/* Subrayado */}
+                  <span
+                    className={`absolute -bottom-1 left-0 h-[2px] bg-black transition-all duration-300 ${
+                      isActive(link.href) ? 'w-full' : 'w-0'
+                    }`}></span>
+                </Link>
+              ) : (
+                <button
+                  onClick={link.action}
+                  className='text-gray-700 hover:text-black transition-all'>
+                  {link.name}
+                </button>
+              )}
+            </li>
+          ))}
+        </ul>
+
+        {/* Iconos a la derecha */}
+        <div className='flex space-x-6 items-center text-gray-700'>
+          <FaSearch className='w-5 h-5 hover:text-black transition' />
+          <FaUser className='w-5 h-5 hover:text-black transition' />
+          <FaStar className='w-5 h-5 hover:text-black transition' />
+          <FaShoppingBag className='w-5 h-5 hover:text-black transition' />
+        </div>
+
+        {/* Botón de menú hamburguesa */}
         <button
-          className='md:hidden text-gray-600 focus:outline-none'
+          className='md:hidden text-gray-700 focus:outline-none'
           onClick={() => setDrawerOpen(true)}>
-          {/* Icono de menú (hamburger) */}
           <svg
-            xmlns='http://www.w3.org/2000/svg'
+            className='w-6 h-6'
             fill='none'
-            viewBox='0 0 24 24'
-            strokeWidth={2}
             stroke='currentColor'
-            className='w-6 h-6'>
+            viewBox='0 0 24 24'
+            xmlns='http://www.w3.org/2000/svg'>
             <path
               strokeLinecap='round'
               strokeLinejoin='round'
-              d='M3 6h18M3 12h18m-9 6h9'
+              strokeWidth={2}
+              d='M4 6h16M4 12h16M4 18h16'
             />
           </svg>
         </button>
-
-        {/* Links para pantallas grandes */}
-        <div className='hidden md:flex space-x-6 text-gray-600'>
-          {navLinks.map(link => (
-            <Link
-              key={link.name}
-              to={link.href}
-              className='hover:text-my-gray transition-all'>
-              {link.name}
-            </Link>
-          ))}
-          <div>
-            <Link
-              to='/signup'
-              className='bg-black text-white py-2 px-4 rounded-lg shadow-md hover:bg-gray-800 transition-all'>
-              Sign Up
-            </Link>
-          </div>
-        </div>
       </nav>
 
       {/* Drawer */}
       <Drawer open={isDrawerOpen} setOpen={setDrawerOpen}>
-        {navLinks.map(link => (
-          <Link
-            key={link.name}
-            to={link.href}
-            className='block text-lg text-gray-600 hover:text-my-gray transition-all'
-            onClick={() => setDrawerOpen(false)} // Cierra el Drawer al hacer clic
-          >
-            {link.name}
-          </Link>
-        ))}
+        {navLinks.map(
+          (link, index) =>
+            link.href && (
+              <Link
+                key={index}
+                to={link.href}
+                className='block text-lg text-gray-600 hover:text-my-gray transition-all'
+                onClick={() => setDrawerOpen(false)}>
+                {link.name}
+              </Link>
+            )
+        )}
         <Link
-          to='/signup'
+          to='/sign-in'
+          className='block bg-black text-white py-2 px-4 rounded-lg shadow-md hover:bg-gray-800 transition-all text-center mt-4'
+          onClick={() => setDrawerOpen(false)}>
+          Sign In
+        </Link>
+        <Link
+          to='/sign-up'
           className='block bg-black text-white py-2 px-4 rounded-lg shadow-md hover:bg-gray-800 transition-all text-center mt-4'
           onClick={() => setDrawerOpen(false)}>
           Sign Up
