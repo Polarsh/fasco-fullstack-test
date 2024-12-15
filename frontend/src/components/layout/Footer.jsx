@@ -26,7 +26,7 @@ export default function Footer() {
             {footerLinks.map(link => (
               <Link
                 key={link.name}
-                to={link.href}
+                to={'/shop'}
                 className='hover:text-gray-800 transition-colors'>
                 {link.name}
               </Link>
