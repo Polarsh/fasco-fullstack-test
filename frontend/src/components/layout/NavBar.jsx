@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Drawer from '../Drawer'
 import Logo from '../Logo'
 
-export default function NewNavbar() {
+export default function Navbar() {
   const [isDrawerOpen, setDrawerOpen] = useState(false)
   const [isDropdownOpen, setDropdownOpen] = useState(false)
   const location = useLocation() // Obtenemos la ruta actual
@@ -12,11 +12,16 @@ export default function NewNavbar() {
   const navLinks = [
     { name: 'Home', href: '/' },
     { name: 'Shop', href: '/shop' },
-    { name: 'Products', href: '/products' },
+    { name: 'Products', href: '/product/' },
     { name: 'Pages', action: () => setDropdownOpen(!isDropdownOpen) },
   ]
 
-  const isActive = path => location.pathname === path
+  const isActive = path => {
+    if (path === '/') {
+      return location.pathname === '/'
+    }
+    return location.pathname.startsWith(path) && path !== '/'
+  }
 
   return (
     <header className='bg-white shadow-md'>

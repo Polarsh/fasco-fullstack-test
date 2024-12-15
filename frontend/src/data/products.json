@@ -1,0 +1,67 @@
+[
+  {
+    "id": 1,
+    "img": "/images/products/product_1.png",
+    "name": "Rounded Red Hat",
+    "price": "$8.00",
+    "colors": ["#FFD700", "#000000"]
+  },
+  {
+    "id": 2,
+    "img": "/images/products/product_2.png",
+    "name": "Linen Blend Shirt",
+    "price": "$17.00",
+    "isSoldOut": true,
+    "colors": ["#FF4500", "#008000"]
+  },
+  {
+    "id": 3,
+    "img": "/images/products/product_3.png",
+    "name": "Long Sleeve Coat",
+    "price": "$106.00",
+    "colors": ["#708090", "#2F4F4F"]
+  },
+  {
+    "id": 4,
+    "img": "/images/products/product_4.png",
+    "name": "Bizzy Denim Hat",
+    "price": "$25.00",
+    "colors": ["#483D8B", "#FFD700"]
+  },
+  {
+    "id": 5,
+    "img": "/images/products/product_5.png",
+    "name": "Linen Plain Top",
+    "price": "$25.00",
+    "colors": ["#FFD700", "#000000"]
+  },
+  {
+    "id": 6,
+    "img": "/images/products/product_6.png",
+    "name": "Oversized T-Shirt",
+    "price": "$11.00",
+    "discount": "$14.00",
+    "colors": ["#FF4500", "#008000"]
+  },
+  {
+    "id": 7,
+    "img": "/images/products/product_7.png",
+    "name": "Polarized Sunglasses",
+    "price": "$18.00",
+    "colors": ["#708090", "#2F4F4F"]
+  },
+  {
+    "id": 8,
+    "img": "/images/products/product_8.png",
+    "name": "Rockstar Jacket",
+    "price": "$22.00",
+    "colors": ["#483D8B", "#FFD700"]
+  },
+  {
+    "id": 9,
+    "img": "/images/products/product_9.png",
+    "name": "Dotted Black Dress",
+    "price": "$20.00",
+    "colors": ["#708090", "#2F4F4F"]
+  }
+]
