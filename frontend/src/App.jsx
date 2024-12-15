@@ -7,12 +7,20 @@ import Layout from './layout/layout'
 export default function App() {
   return (
     <>
-      <Layout>
-        <Routes>
-          <Route path='/' element={<HomePage />} />
-          <Route path='*' element={<DefaultPage />} />
-        </Routes>
-      </Layout>
+      <Routes>
+        {/* Rutas sin el Layout */}
+        <Route path='/' element={<HomePage />} />
+
+        {/* Rutas con el Layout */}
+        <Route
+          path='*'
+          element={
+            <Layout>
+              <DefaultPage />
+            </Layout>
+          }
+        />
+      </Routes>
     </>
   )
 }
