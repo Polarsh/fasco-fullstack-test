@@ -6,11 +6,18 @@ import Drawer from '../Drawer'
 export default function HomeNavbar() {
   const [isDrawerOpen, setDrawerOpen] = useState(false)
 
+  const scrollToSection = id => {
+    const section = document.getElementById(id)
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }
+
   const navLinks = [
-    { name: 'Home', href: '/' },
-    { name: 'Deals', href: '/deals' },
-    { name: 'New Arrivals', href: '/new-arrivals' },
-    { name: 'Packages', href: '/packages' },
+    { name: 'Home', action: () => scrollToSection('home') },
+    { name: 'Deals', action: () => scrollToSection('deals') },
+    { name: 'New Arrivals', action: () => scrollToSection('new-arrivals') },
+    { name: 'Testimonials', action: () => scrollToSection('testimonials') },
     { name: 'Sign in', href: '/signin' },
   ]
 
@@ -43,14 +50,23 @@ export default function HomeNavbar() {
 
           {/* Links para pantallas grandes */}
           <div className='hidden md:flex space-x-6 text-gray-600'>
-            {navLinks.map(link => (
-              <Link
-                key={link.name}
-                to={link.href}
-                className='hover:text-my-gray transition-all'>
-                {link.name}
-              </Link>
-            ))}
+            {navLinks.map((link, index) =>
+              link.href ? (
+                <Link
+                  key={index}
+                  to={link.href}
+                  className='hover:text-my-gray transition-all'>
+                  {link.name}
+                </Link>
+              ) : (
+                <button
+                  key={index}
+                  onClick={link.action}
+                  className='hover:text-my-gray transition-all'>
+                  {link.name}
+                </button>
+              )
+            )}
             <div>
               <Link
                 to='/signup'
@@ -64,16 +80,27 @@ export default function HomeNavbar() {
 
       {/* Drawer */}
       <Drawer open={isDrawerOpen} setOpen={setDrawerOpen}>
-        {navLinks.map(link => (
-          <Link
-            key={link.name}
-            to={link.href}
-            className='block text-lg text-gray-600 hover:text-my-gray transition-all'
-            onClick={() => setDrawerOpen(false)} // Cierra el Drawer al hacer clic
-          >
-            {link.name}
-          </Link>
-        ))}
+        {navLinks.map((link, index) =>
+          link.href ? (
+            <Link
+              key={index}
+              to={link.href}
+              className='block text-lg text-gray-600 hover:text-my-gray transition-all'
+              onClick={() => setDrawerOpen(false)}>
+              {link.name}
+            </Link>
+          ) : (
+            <button
+              key={index}
+              onClick={() => {
+                link.action()
+                setDrawerOpen(false)
+              }}
+              className='block text-lg text-gray-600 hover:text-my-gray transition-all'>
+              {link.name}
+            </button>
+          )
+        )}
         <Link
           to='/signup'
           className='block bg-black text-white py-2 px-4 rounded-lg shadow-md hover:bg-gray-800 transition-all text-center mt-4'

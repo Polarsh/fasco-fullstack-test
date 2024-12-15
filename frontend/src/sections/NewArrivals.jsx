@@ -76,7 +76,7 @@ export default function NewArrivalsSection() {
   const [selectedCategory, setSelectedCategory] = useState(1)
 
   return (
-    <div className='bg-white py-12'>
+    <div id='new-arrivals' className='bg-white py-12'>
       <div className='max-w-screen-xl mx-auto px-4'>
         {/* Header */}
         <h2 className='text-4xl font-bold text-gray-800 text-center'>

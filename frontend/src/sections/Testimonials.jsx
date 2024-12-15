@@ -46,7 +46,7 @@ export default function TestimonialsSection() {
   }
 
   return (
-    <div className='bg-[#fafafa] py-12 min-h-[550px]'>
+    <div id='testimonials' className='bg-[#fafafa] py-12 min-h-[550px]'>
       <div className='max-w-screen-xl mx-auto px-4 overflow-hidden'>
         {/* Header */}
         <h2 className='text-4xl font-bold text-gray-800 text-center'>

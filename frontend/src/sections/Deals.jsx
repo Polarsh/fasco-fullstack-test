@@ -32,7 +32,7 @@ export default function DealsSection() {
   }
 
   return (
-    <div className='bg-[#fbfbfb] py-32'>
+    <div id='deals' className='bg-[#fbfbfb] py-32'>
       <div className='max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center'>
         {/* Texto y botón */}
         <div className='flex flex-col justify-center items-start'>

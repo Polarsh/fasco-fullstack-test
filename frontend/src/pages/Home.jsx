@@ -12,7 +12,7 @@ import Footer from '../components/layout/Footer'
 
 export default function HomePage() {
   return (
-    <div className=' space-y-12 px-4 md:px-0'>
+    <div id='home' className='space-y-12 px-4 md:px-0'>
       <HomeNavbar />
       <HeaderSection />
       <LogosSection />
