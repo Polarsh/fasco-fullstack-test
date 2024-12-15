@@ -77,7 +77,7 @@ const ProductPage = () => {
         {/* Columna Izquierda: Imágenes */}
         <div className='flex gap-4'>
           <div className='flex flex-col gap-4'>
-            {products.map((product, idx) => (
+            {products.slice(0, 5).map((product, idx) => (
               <img
                 key={idx}
                 src={product.img}
@@ -290,7 +290,7 @@ const ProductPage = () => {
       <PeakyBlindersSection />
       <FeaturesSection />
       <DealsSection />
-      <div className=' mt-16 mb-8'>
+      <div className=' mt-16 mb-8 px-4'>
         <NewsletterSection />
       </div>
     </div>

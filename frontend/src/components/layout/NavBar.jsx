@@ -58,7 +58,7 @@ export default function Navbar() {
         </ul>
 
         {/* Iconos a la derecha */}
-        <div className='flex space-x-6 items-center text-gray-700'>
+        <div className=' hidden md:flex space-x-6 items-center text-gray-700'>
           <FaSearch className='w-5 h-5 hover:text-black transition' />
           <FaUser className='w-5 h-5 hover:text-black transition' />
           <FaStar className='w-5 h-5 hover:text-black transition' />

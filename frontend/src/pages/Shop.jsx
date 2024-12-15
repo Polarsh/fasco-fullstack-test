@@ -132,7 +132,9 @@ export default function ShopPage() {
       <PeakyBlindersSection />
       <FeaturesSection />
       <FollowUsSection />
-      <NewsletterSection />
+      <div className=' px-4'>
+        <NewsletterSection />
+      </div>
     </div>
   )
 }
