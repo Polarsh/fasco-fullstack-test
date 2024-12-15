@@ -13,6 +13,20 @@ El frontend es una aplicación de React que muestra una interfaz de tienda en l�
 Puedes ver el frontend en acción en:  
 **[https://fasco-fullstack-test.vercel.app/](https://fasco-fullstack-test.vercel.app/)**
 
+### **Rutas del Frontend**
+
+El frontend incluye las siguientes rutas:
+
+- **`/`**: Página principal (Home).
+- **`/sign-in`**: Página de inicio de sesión.
+- **`/sign-up`**: Página de registro.
+- **`/forgot-password`**: Página para recuperar contraseña.
+- **`/shop`**: Página de la tienda.
+- **`/product/`**: Redirige automáticamente a **`/product/1`**.
+- **`/product/:productId`**: Página de detalles del producto.
+- **`/cart`**: Página del carrito de compras.
+- **`/checkout`**: Página de checkout.
+
 ### **Requisitos**
 
 - Node.js (versión >= 14)
